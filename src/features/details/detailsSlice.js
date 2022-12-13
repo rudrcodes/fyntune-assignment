@@ -82,9 +82,13 @@ const detailsSlice = createSlice({
       state.shops.push(action.payload);
       localStorage.setItem("shops", JSON.stringify(state.shops));
     },
+    removeShop: (state, action) => {
+      state.shops = state.shops.filter((shop) => shop.id !== action.payload);
+      localStorage.setItem("shops", JSON.stringify(state.shops));
+    },
     
   },
 });
 
 export default detailsSlice.reducer;
-export const { addShop } = detailsSlice.actions;
+export const { addShop,removeShop } = detailsSlice.actions;

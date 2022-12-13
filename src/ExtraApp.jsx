@@ -1,24 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addShop, removeShop } from "./features/details/detailsSlice";
+import { addShop } from "./features/details/detailsSlice";
 import Dropdown from "react-dropdown";
+import styled from "styled-components";
 import "react-dropdown/style.css";
 import "./App.css";
-import { Footer } from "./components/Footer";
 
 function App() {
   const shops = useSelector((state) => state.details.shops);
+  // let filteredList = useSelector((state) => state.details.shops);
   const dispatch = useDispatch();
-
+  // useEffect(() => {
+  //   // shops
+  // }, []);
+  // • You can add a shop with its name, the area of the shop, the category of the shop, the opening and closing date of the shop
+  // const [shopsList, setShopsList] = useState(shops);
+  // console.log(shopsList);
+  // let ;
+  // const fulldate=new Date()
   const todayYear = new Date().getFullYear();
   const todayMonth = new Date().getMonth();
   const todayDate = new Date().getDate();
+  // const today = `${todayDate}-${todayMonth + 1}-${todayYear}`;
   const today = `${todayYear}-${todayMonth + 1}-${todayDate}`;
-  // const newToday = `${todayYear}-${todayMonth + 1}-${todayDate + 2}`;
-  // console.log(typeof today);
-  // console.log(today);
-  // console.log(newToday);
-  // console.log(today > newToday ? "large" : "small");
+  // const today = Object(`${todayYear}-${todayMonth + 1}-${todayDate}`);
+  const newToday = `${todayYear}-${todayMonth + 1}-${todayDate+2}`
+  // 29/11/2022
+
+  console.log(typeof today);
+  console.log(today);
+  console.log(newToday);
+  console.log((today>newToday)?"large":"small")
+  // console.log(fulldate);
   const [shopList, setShopList] = useState(shops);
   const [sName, setSName] = useState(null);
   const [sArea, setSArea] = useState(null);
@@ -48,9 +61,8 @@ function App() {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    // flexDirection:"column",
     flexWrap: "wrap",
-    marginTop: "20px",
-    padding:"5px"
   };
   // /////////////
   const handleSubmitForm = (e) => {
@@ -66,8 +78,33 @@ function App() {
     const opDate = new Date(sOpeningDate);
     const clDate = new Date(sClosingDate);
     console.log(typeof opDate);
-
+    //Bad condition checking
+    // if (
+    // sClosingDate[9] >= sOpeningDate[9] &&
+    // sClosingDate[8] >= sOpeningDate[8] &&
+    // sClosingDate[7] >= sOpeningDate[7] &&
+    // sClosingDate[6] >= sOpeningDate[6] &&
+    // sClosingDate[4] >= sOpeningDate[4] &&
+    // sClosingDate[3] >= sOpeningDate[3] &&
+    // sClosingDate[1] >= sOpeningDate[1] &&
+    // sClosingDate[0] >= sOpeningDate[0]
+    // )
     if (opDate < clDate) {
+      // setShopsList([
+      //   ...shopsList,
+      //   {
+      //     sName,
+      //     sArea,
+      //     sCategory,
+      //     sOpeningDate,
+      //     sClosingDate,
+      //   },
+      // ]);
+      // {() => {
+      // let status;
+
+      // return status;
+      // }}
       if (today > opDate && today < clDate) {
         setShopStatus("open");
       } else setShopStatus("close");
@@ -84,18 +121,26 @@ function App() {
         })
       );
     } else {
-      alert("Closing date is less than the opening date. Closing date should be more than the opening date");
+      alert("Closing date is less than the opening date");
     }
+    // console.log(newShop);
+
+    console.log(sOpeningDate.length);
+
+    // 29/11/2022
+    // console.log(sClosingDate.day());
   };
+  const defaultOptionObj = area[0];
+  // console.log(defaultOptionObj);
   const newShopClass = {
     backgroundColor: "#ede3e3",
     color: "#000",
     border: "2px solid white",
     borderRadius: "20px",
     margin: "10px",
-    padding:"8px"
   };
   const applyAreaFilter = () => {
+    // dispatch(applyFilter(filterArea, filterCategory));
     let filterShops;
     filterShops = shops.filter((shop) => {
       if (shop.sArea == filterArea) {
@@ -105,6 +150,7 @@ function App() {
     setShopList(filterShops);
   };
   const applyCategoryFilter = () => {
+    // dispatch(applyFilter(filterArea, filterCategory));
     let filterShops;
     filterShops = shops.filter((shop) => {
       if (shop.sCategory == filterCategory) {
@@ -114,6 +160,7 @@ function App() {
     setShopList(filterShops);
   };
   const applyBothFilter = () => {
+    // dispatch(applyFilter(filterArea, filterCategory));
     let filterShops;
     filterShops = shops.filter((shop) => {
       if (shop.sArea == filterArea && shop.sCategory == filterCategory) {
@@ -123,17 +170,19 @@ function App() {
     setShopList(filterShops);
   };
   const removeFilter = () => {
+    // dispatch(applyFilter(filterArea, filterCategory));
+
     setShopList(shops);
   };
-  const statusFilter = () => {};
-  const removeShop = (shopID) => {
-    dispatch(removeShop(shopID));
-    console.log(shopID);
+  const statusFilter = () => {
+    // dispatch(applyFilter(filterArea, filterCategory));
+    // setShopList(shops);
   };
+
   return (
     <div className="App">
       <form onSubmit={handleSubmitForm}>
-        <label>Name : </label>
+        <label>Name </label>
         <input
           required
           type="text"
@@ -144,8 +193,6 @@ function App() {
           }}
         />
         <br />
-        <label>Area : </label>
-
         <Dropdown
           required
           className="myClassName"
@@ -157,8 +204,6 @@ function App() {
         />
 
         <br />
-        <label>Category : </label>
-
         <Dropdown
           required
           className="myClassName"
@@ -169,7 +214,7 @@ function App() {
           placeholder="Select category of shop"
         />
         <br />
-        <label>Opening Date : </label>
+        <label>opening </label>
 
         <input
           type="date"
@@ -181,7 +226,7 @@ function App() {
           }}
         />
         <br />
-        <label>Closing Date : </label>
+        <label>closing </label>
         <input
           type="date"
           required
@@ -196,7 +241,7 @@ function App() {
 
         <button type="submit">Add Shop</button>
       </form>
-      <h1>---- List of all shops ----</h1>
+      <h2>List of all shops</h2>
       <Dropdown
         required
         className="myClassName"
@@ -205,7 +250,7 @@ function App() {
           setFilterArea(e.value);
         }}
         placeholder="Filter by Area"
-      />
+      />{" "}
       <Dropdown
         required
         className="myClassName"
@@ -227,7 +272,7 @@ function App() {
       <div style={shopListDiv}>
         {shopList.map((shop) => {
           return (
-            <div key={Math.random() * 100} style={newShopClass}>
+            <div key={Math.random() * 10000} style={newShopClass}>
               <h4>Shop Name : {shop.sName}</h4>
               <h4>Shop Area :{shop.sArea}</h4>
               <h4>Shop Category :{shop.sCategory}</h4>
@@ -235,12 +280,10 @@ function App() {
               <h4>Shop Closing Date:{shop.sClosingDate}</h4>
               <h4>Today Date:{shop.today}</h4>
               <h4>Shop Status:{shop.shopStatus}</h4>
-              <button onClick={() => removeShop(shop.id)}>Remove shop</button>
             </div>
           );
         })}
       </div>
-      <Footer />
     </div>
   );
 }
