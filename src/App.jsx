@@ -159,7 +159,10 @@ function App() {
           placeholder="Enter shop name"
           value={sName || ""}
           onChange={(e) => {
-            setSName(e.target.value);
+            const re = /^[A-Za-z]+$/;
+            if (e.target.value == "" || re.test(e.target.value)) {
+              setSName(e.target.value);
+            }
           }}
         />
         <br />
