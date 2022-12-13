@@ -160,7 +160,7 @@ function App() {
           value={sName || ""}
           onChange={(e) => {
             const re = /^[A-Za-z]+$/;
-            if (e.target.value == "" || re.test(e.target.value)) {
+            if (e.target.value == " " || re.test(e.target.value)) {
               setSName(e.target.value);
             }
           }}
