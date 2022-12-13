@@ -14,11 +14,6 @@ function App() {
   const todayDate = new Date().getDate();
   const today = new Date(`${todayYear}-${todayMonth + 1}-${todayDate}`);
 
-  // const newToday = `${todayYear}-${todayMonth + 1}-${todayDate + 2}`;
-  // console.log(typeof today);
-  // console.log(today);
-  // console.log(newToday);
-  // console.log(today > newToday ? "large" : "small");
   const [shopList, setShopList] = useState(shops);
   const [sName, setSName] = useState(null);
   const [sArea, setSArea] = useState(null);
@@ -53,11 +48,7 @@ function App() {
     marginTop: "20px",
     padding: "5px",
   };
-  // const checkShopStatus = () => {
-  //   if (today > opDate && today < clDate) {
-  //     setShopStatus("open");
-  //   } else setShopStatus("close");
-  // };
+
   // /////////////
   const handleSubmitForm = (e) => {
     // e.preventDefault();
@@ -91,8 +82,6 @@ function App() {
           sOpeningDate,
           sClosingDate,
           shopStatus,
-
-          // today,
         })
       );
     } else {
@@ -160,6 +149,7 @@ function App() {
           value={sName || ""}
           onChange={(e) => {
             const re = /^[A-Za-z]+$/;
+
             if (e.target.value == " " || re.test(e.target.value)) {
               setSName(e.target.value);
             }
@@ -266,7 +256,6 @@ function App() {
                 <h4>Category :{shop.sCategory}</h4>
                 <h4>Opening Date :{shop.sOpeningDate}</h4>
                 <h4> Closing Date:{shop.sClosingDate}</h4>
-                {/* <h4>Today Date:{shop.today}</h4> */}
                 <h4>Shop Status: {shop.shopStatus}</h4>
                 <button onClick={() => removeShop(shop.id)}>Remove shop</button>
               </div>
