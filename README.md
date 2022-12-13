@@ -6,4 +6,4 @@
 
 ## ScreenShots
 
-![ss1](url "ss1.png")
+![ss1]('../ss1.png' "ss1.png")
