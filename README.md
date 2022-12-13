@@ -6,12 +6,12 @@
 
 ## ScreenShots
 
-![ss1](ss1.png "ss1.png")
-![ss1](ss2.png "ss2.png")
+![ss1](/images/ss1.png "ss1.png")
+![ss1](/images//ss2.png "ss2.png")
 
 ### ScreenShots after applying Filters
 
-![ss1](ss3AreaFilter.png "ss3AreaFilter.png")
-![ss1](ss4CatFilter.png "ss4CatFilter.png")
-![ss1](ss5StatFilter.png "ss5StatFilter.png")
-![ss1](errorSS.png "errorSS.png")
+![ss1](/images/ss3AreaFilter.png "ss3AreaFilter.png")
+![ss1](/images/ss4CatFilter.png "ss4CatFilter.png")
+![ss1](/images/ss5StatFilter.png "ss5StatFilter.png")
+![ss1](/images/errorSS.png "errorSS.png")
