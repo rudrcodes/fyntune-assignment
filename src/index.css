@@ -46,7 +46,7 @@ body {
 
 h1 {
   font-family: 'Unbounded', cursive;
-
+  margin-bottom: 15px;
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -61,7 +61,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
-  
+
 }
 
 button:hover {
@@ -116,7 +116,7 @@ form {
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 30px;
-  
+
 }
 
 button {

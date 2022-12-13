@@ -140,6 +140,8 @@ function App() {
   };
   return (
     <div className="App">
+      <h1>---- 🛒 Shop Manager ----</h1>
+
       <form onSubmit={handleSubmitForm}>
         <label>Name : </label>
         <input
