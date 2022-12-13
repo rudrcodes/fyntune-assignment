@@ -9,11 +9,11 @@ import { Footer } from "./components/Footer";
 function App() {
   const shops = useSelector((state) => state.details.shops);
   const dispatch = useDispatch();
-
   const todayYear = new Date().getFullYear();
   const todayMonth = new Date().getMonth();
   const todayDate = new Date().getDate();
-  const today = `${todayYear}-${todayMonth + 1}-${todayDate}`;
+  const today = new Date(`${todayYear}-${todayMonth + 1}-${todayDate}`);
+
   // const newToday = `${todayYear}-${todayMonth + 1}-${todayDate + 2}`;
   // console.log(typeof today);
   // console.log(today);
@@ -27,7 +27,7 @@ function App() {
   const [sClosingDate, setSClosingDate] = useState(null);
   const [filterArea, setFilterArea] = useState(null);
   const [filterCategory, setFilterCategory] = useState(null);
-  const [shopStatus, setShopStatus] = useState(null);
+  const [filterStatus, setFilterStatus] = useState(null);
   const area = [
     "Thane",
     "Pune",
@@ -44,17 +44,23 @@ function App() {
     "Chemist",
     "Stationery shop",
   ];
+  const status = ["OPEN", "CLOSE"];
   const shopListDiv = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
     marginTop: "20px",
-    padding:"5px"
+    padding: "5px",
   };
+  // const checkShopStatus = () => {
+  //   if (today > opDate && today < clDate) {
+  //     setShopStatus("open");
+  //   } else setShopStatus("close");
+  // };
   // /////////////
   const handleSubmitForm = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (
       sName == null ||
       sArea == null ||
@@ -65,12 +71,17 @@ function App() {
       return;
     const opDate = new Date(sOpeningDate);
     const clDate = new Date(sClosingDate);
-    console.log(typeof opDate);
+    let shopStatus;
+    if (today >= opDate && today < clDate) {
+      shopStatus = "OPEN";
+      console.log("open");
+    } else {
+      shopStatus = "CLOSE";
+      console.log("close");
+    }
+    console.log(today);
 
     if (opDate < clDate) {
-      if (today > opDate && today < clDate) {
-        setShopStatus("open");
-      } else setShopStatus("close");
       dispatch(
         addShop({
           id: shops[shops.length - 1] ? shops[shops.length - 1].id + 1 : 0,
@@ -80,21 +91,17 @@ function App() {
           sOpeningDate,
           sClosingDate,
           shopStatus,
-          today,
+
+          // today,
         })
       );
     } else {
-      alert("Closing date is less than the opening date. Closing date should be more than the opening date");
+      alert(
+        "Closing date is less than the opening date. Closing date should be more than the opening date"
+      );
     }
   };
-  const newShopClass = {
-    backgroundColor: "#ede3e3",
-    color: "#000",
-    border: "2px solid white",
-    borderRadius: "20px",
-    margin: "10px",
-    padding:"8px"
-  };
+
   const applyAreaFilter = () => {
     let filterShops;
     filterShops = shops.filter((shop) => {
@@ -113,10 +120,14 @@ function App() {
     });
     setShopList(filterShops);
   };
-  const applyBothFilter = () => {
+  const applyAllFilter = () => {
     let filterShops;
     filterShops = shops.filter((shop) => {
-      if (shop.sArea == filterArea && shop.sCategory == filterCategory) {
+      if (
+        shop.sArea == filterArea &&
+        shop.sCategory == filterCategory &&
+        shop.shopStatus == filterStatus
+      ) {
         return shop;
       }
     });
@@ -125,10 +136,18 @@ function App() {
   const removeFilter = () => {
     setShopList(shops);
   };
-  const statusFilter = () => {};
+  const statusFilter = () => {
+    let filterShops;
+    filterShops = shops.filter((shop) => {
+      if (shop.shopStatus == filterStatus) {
+        return shop;
+      }
+    });
+    setShopList(filterShops);
+  };
   const removeShop = (shopID) => {
-    dispatch(removeShop(shopID));
     console.log(shopID);
+    dispatch(removeShop(shopID));
   };
   return (
     <div className="App">
@@ -215,30 +234,44 @@ function App() {
         }}
         placeholder="Filter by category"
       />
+      <Dropdown
+        required
+        className="myClassName"
+        options={status}
+        onChange={(e) => {
+          setFilterStatus(e.value);
+        }}
+        placeholder="Filter by Status"
+      />
       <button onClick={() => applyAreaFilter()}>Apply Area Filter</button>
       <button onClick={() => applyCategoryFilter()}>
         Apply Category Filter
       </button>
-      <button onClick={() => applyBothFilter()}>
-        Apply Both Together Filter
+      <button onClick={() => statusFilter()}>Status Filter</button>
+
+      <button onClick={() => applyAllFilter()}>
+        Apply All Filters togehter
       </button>
       <button onClick={() => removeFilter()}>Remove Filter</button>
-      <button onClick={() => statusFilter()}>Status Filter</button>
       <div style={shopListDiv}>
-        {shopList.map((shop) => {
-          return (
-            <div key={Math.random() * 100} style={newShopClass}>
-              <h4>Shop Name : {shop.sName}</h4>
-              <h4>Shop Area :{shop.sArea}</h4>
-              <h4>Shop Category :{shop.sCategory}</h4>
-              <h4>Shop Opening Date :{shop.sOpeningDate}</h4>
-              <h4>Shop Closing Date:{shop.sClosingDate}</h4>
-              <h4>Today Date:{shop.today}</h4>
-              <h4>Shop Status:{shop.shopStatus}</h4>
-              <button onClick={() => removeShop(shop.id)}>Remove shop</button>
-            </div>
-          );
-        })}
+        {shopList.length > 0 ? (
+          shopList.map((shop) => {
+            return (
+              <div key={Math.random() * 100} className="newShopClass">
+                <h4>Shop Name : {shop.sName}</h4>
+                <h4>Area :{shop.sArea}</h4>
+                <h4>Category :{shop.sCategory}</h4>
+                <h4>Opening Date :{shop.sOpeningDate}</h4>
+                <h4> Closing Date:{shop.sClosingDate}</h4>
+                {/* <h4>Today Date:{shop.today}</h4> */}
+                <h4>Shop Status: {shop.shopStatus}</h4>
+                <button onClick={() => removeShop(shop.id)}>Remove shop</button>
+              </div>
+            );
+          })
+        ) : (
+          <h2>No shops </h2>
+        )}
       </div>
       <Footer />
     </div>

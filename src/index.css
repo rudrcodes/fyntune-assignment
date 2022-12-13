@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -16,6 +19,8 @@
 }
 
 * {
+  font-family: 'Ubuntu', sans-serif;
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -40,6 +45,8 @@ body {
 }
 
 h1 {
+  font-family: 'Unbounded', cursive;
+
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -54,6 +61,7 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  
 }
 
 button:hover {
@@ -89,6 +97,8 @@ button:focus-visible {
   max-width: 90vw;
   padding: 6px;
   margin: 10px;
+  /* font-family: 'Unbounded', cursive; */
+
 }
 
 label {
@@ -97,8 +107,8 @@ label {
 
 input {
   padding: 6px;
-  margin-top:10px;
-  margin-bottom:10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 form {
@@ -106,6 +116,7 @@ form {
   padding: 15px;
   border-radius: 8px;
   margin-bottom: 30px;
+  
 }
 
 button {
@@ -115,6 +126,8 @@ button {
 }
 
 a {
+  font-family: 'Unbounded', cursive;
+
   margin-left: 5px;
   color: green;
   transition: all 200ms ease
@@ -122,7 +135,7 @@ a {
 
 a:hover {
   color: #f25353
-  /* color: #535bf2 */
+    /* color: #535bf2 */
 }
 
 footer {
@@ -137,7 +150,7 @@ footer {
 }
 
 @media (max-width: 787px) {
-  h1{
+  h1 {
     font-size: 1.3rem;
   }
 
@@ -157,15 +170,25 @@ footer {
 
   }
 
-  input{
-    
-  padding: 6px;
-  /* margin-top:6px; */
-  /* margin-bottom:6px; */
+  input {
+
+    padding: 6px;
+    /* margin-top:6px; */
+    /* margin-bottom:6px; */
   }
+
   button {
     border: 2px solid #fff;
     /* margin: 3px; */
     /* display: inline-block; */
   }
+}
+
+.newShopClass {
+  background-color: #ede3e3;
+  color: #000;
+  border: 2px solid white;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 8px;
 }

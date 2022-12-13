@@ -84,7 +84,9 @@ const detailsSlice = createSlice({
     },
     removeShop: (state, action) => {
       state.shops = state.shops.filter((shop) => shop.id !== action.payload);
-      localStorage.setItem("shops", JSON.stringify(state.shops));
+      state.shops.splice(state.shops.findIndex((arrow) => arrow.id === action.payload), 1);
+console.log(action.payload)
+      // localStorage.setItem("shops", JSON.stringify(state.shops));
     },
     
   },
