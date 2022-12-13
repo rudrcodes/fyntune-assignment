@@ -11,7 +11,7 @@
 
 ### ScreenShots after applying Filters
 
-![ss1](ss3AreaFilter.png.png "ss3AreaFilter.png")
-![ss1](ss4CatFilter.png.png "ss4CatFilter.png")
-![ss1](ss5StatFilter.png.png "ss5StatFilter.png")
-![ss1](errorSS.png.png.png "errorSS.png")
+![ss1](ss3AreaFilter.png "ss3AreaFilter.png")
+![ss1](ss4CatFilter.png "ss4CatFilter.png")
+![ss1](ss5StatFilter.png "ss5StatFilter.png")
+![ss1](errorSS.png "errorSS.png")
