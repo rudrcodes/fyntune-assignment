@@ -6,7 +6,7 @@
 
 ## ScreenShots
 
-![ss1](/images/ss1.png "ss1.png")
+![ss1](/images/ss1home.png.png "ss1.png")
 ![ss1](/images//ss2.png "ss2.png")
 
 ### ScreenShots after applying Filters
